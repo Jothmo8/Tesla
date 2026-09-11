@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Tesla Direct</title>
+  <rect width="64" height="64" rx="14" fill="#e82127"/>
+  <path fill="#fff" d="M12 17c4.4 4.1 10 5.8 18 5.8S43.6 21.1 48 17c-.6 3.5-3.1 6.2-7.1 7.5l-4.8 1.6v21.5h-8.2V26.1l-4.8-1.6C15.1 23.2 12.6 20.5 12 17Z"/>
+</svg>
