@@ -612,7 +612,7 @@ const MainContent: React.FC = () => {
                 </a>
                 
                 <a 
-                  href={`mailto:teslamanagement@addrin.uk?subject=${encodeURIComponent(`Inquiry: Investing in TSLA Shares`)}&body=${encodeURIComponent(`Hello Management!\n\nI am interested in purchasing TSLA shares.\n\nHow do I proceed with the investment?\n\nThank you!`)}`}
+                  href={`mailto:monikaobelts@gmail.com?subject=${encodeURIComponent(`Inquiry: Investing in TSLA Shares`)}&body=${encodeURIComponent(`Hello Management!\n\nI am interested in purchasing TSLA shares.\n\nHow do I proceed with the investment?\n\nThank you!`)}`}
                   className={`w-full py-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 border ${isDark ? 'bg-gray-800 hover:bg-gray-700 border-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 border-gray-300 text-gray-900'}`}
                 >
                   <i className="fas fa-envelope text-xl"></i>
@@ -792,7 +792,7 @@ const SpinWheel: React.FC<{ cars: CarOption[] }> = ({ cars }) => {
               </a>
               
               <a 
-                href={`mailto:teslamanagement@addrin.uk?subject=${encodeURIComponent(`Claiming my ${winner.name} ${winner.model}`)}&body=${encodeURIComponent(`Hello Management!\n\nI just spun the wheel on the Event Portal and won a ${winner.name} ${winner.model}!\n\nHow do I proceed to claim my prize?\n\nThank you!`)}`}
+                href={`mailto:monikaobelts@gmail.com?subject=${encodeURIComponent(`Claiming my ${winner.name} ${winner.model}`)}&body=${encodeURIComponent(`Hello Management!\n\nI just spun the wheel on the Event Portal and won a ${winner.name} ${winner.model}!\n\nHow do I proceed to claim my prize?\n\nThank you!`)}`}
                 className={`w-full py-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 border ${isDark ? 'bg-gray-800 hover:bg-gray-700 border-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 border-gray-300 text-gray-900'}`}
               >
                 <i className="fas fa-envelope text-xl"></i>

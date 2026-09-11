@@ -88,8 +88,8 @@ const calculateMonthlyPayment = (price: number) => {
   const term = 72;
   return Math.round((price * monthlyRate) / (1 - (1 + monthlyRate) ** -term));
 };
-const managerEmail = 'sales@tesla-direct.com';
-const managerWhatsapp = '14155550148';
+const managerEmail = 'monikaobelts@gmail.com';
+const managerWhatsapp = '447498713979';
 const giveawayUrl = '/giveaway';
 
 function App() {
