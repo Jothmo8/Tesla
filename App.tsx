@@ -90,7 +90,7 @@ const calculateMonthlyPayment = (price: number) => {
 };
 const managerEmail = 'sales@tesla-direct.com';
 const managerWhatsapp = '14155550148';
-const giveawayUrl = import.meta.env.VITE_GIVEAWAY_URL || 'http://localhost:3000/';
+const giveawayUrl = '/giveaway';
 
 function App() {
   const [activeCategory, setActiveCategory] = useState<'All' | ProductCategory>('All');

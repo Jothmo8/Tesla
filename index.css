@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root { font-family: Arial, Helvetica, sans-serif; color: #17191b; background: #f4f5f3; font-synthesis: none; text-rendering: optimizeLegibility; --ink: #17191b; --muted: #6c7274; --paper: #f4f5f3; --white: #fff; --soft: #e7e9e7; --line: #d4d8d5; --red: #e82127; --night: #111416; --night-muted: #9ba3a3; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
