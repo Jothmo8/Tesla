@@ -1,0 +1,5 @@
+{
+  "name": "Tesla Event Portal",
+  "description": "A high-performance, responsive landing page featuring real-time crypto calculations, live transaction history, and interactive UI elements styled with Tailwind CSS.",
+  "requestFramePermissions": []
+}
