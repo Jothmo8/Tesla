@@ -124,11 +124,13 @@ select { background: transparent; border: 0; color: var(--ink); font: 11px Arial
 .quantity { align-items: center; display: flex; gap: 12px; margin-top: 10px; }
 .quantity button { background: var(--soft); border: 0; height: 28px; width: 28px; }
 .quantity span { font: 11px Arial, Helvetica, sans-serif; }
-.drawer-footer { border-top: 1px solid var(--line); padding-top: 25px; }
+.drawer-footer { background: linear-gradient(180deg, rgba(244,245,243,0) 0%, rgba(244,245,243,0.86) 18%, rgba(17,20,22,0.96) 100%); border-top: 1px solid var(--line); bottom: 0; box-shadow: 0 -16px 26px rgba(17,20,22,.08); margin-top: auto; padding: 20px 0 0; position: sticky; }
 .drawer-footer > div { display: flex; justify-content: space-between; margin-bottom: 12px; }
 .drawer-footer > div span, .drawer-footer p { color: var(--muted); font-size: 11px; }
 .drawer-footer > div strong { font-size: 19px; }
 .drawer-footer p { line-height: 1.6; }
+.drawer-footer .button.button-dark { background: var(--red); border-radius: 12px; box-shadow: 0 14px 24px rgba(232,33,39,.22); color: #fff; margin-top: 12px; min-height: 52px; }
+.drawer-footer .button.button-dark:hover { background: #ff4b50; }
 .full-width { justify-content: center; width: 100%; }
 .drawer-empty { align-items: center; display: flex; flex: 1; flex-direction: column; justify-content: center; }
 .modal-backdrop { align-items: center; justify-content: center; padding: 20px; }

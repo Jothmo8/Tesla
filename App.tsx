@@ -99,7 +99,7 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [contactMode, setContactMode] = useState<'general' | 'product' | 'shortlist'>('general');
+  const [contactMode, setContactMode] = useState<'general' | 'product' | 'checkout'>('general');
   const [activeHeroIndex, setActiveHeroIndex] = useState(1);
 
   const filteredProducts = useMemo(
@@ -113,16 +113,16 @@ function App() {
   const cartItems = products.filter((product) => cart[product.id]);
   const cartCount = Object.values(cart).reduce((total, count) => total + count, 0);
   const cartTotal = cartItems.reduce((total, product) => total + product.price * cart[product.id], 0);
-  const shortlistMessage = cartItems.map((product) => `${product.name} x${cart[product.id]} (${formatPrice(product.price)} each)`).join(', ');
+  const checkoutMessage = cartItems.map((product) => `${product.name} x${cart[product.id]} (${formatPrice(product.price)} each)`).join(', ');
   const contactMessage = contactMode === 'product' && selectedProduct
     ? `Hello, I am interested in the ${selectedProduct.name} (${formatPrice(selectedProduct.price)}). Please share payment and delivery details.`
-    : contactMode === 'shortlist' && shortlistMessage
-      ? `Hello, I am shopping for: ${shortlistMessage}. Please share payment and delivery details.`
+    : contactMode === 'checkout' && checkoutMessage
+      ? `Hello, I am shopping for: ${checkoutMessage}. Please share payment and delivery details.`
       : 'Hello, I would like to speak with a manager about Tesla vehicles or accessories.';
   const contactSubject = contactMode === 'product' && selectedProduct
     ? `Tesla ${selectedProduct.name} inquiry`
-    : contactMode === 'shortlist'
-      ? 'Tesla shortlist inquiry'
+    : contactMode === 'checkout'
+      ? 'Tesla checkout inquiry'
       : 'Tesla sales inquiry';
   const emailHref = `mailto:${managerEmail}?subject=${encodeURIComponent(contactSubject)}&body=${encodeURIComponent(contactMessage)}`;
   const whatsappHref = `https://wa.me/${managerWhatsapp}?text=${encodeURIComponent(contactMessage)}`;
@@ -144,7 +144,7 @@ function App() {
     });
   };
 
-  const openContact = (product?: Product, mode: 'general' | 'product' | 'shortlist' = product ? 'product' : 'general') => {
+  const openContact = (product?: Product, mode: 'general' | 'product' | 'checkout' = product ? 'product' : 'general') => {
     setSelectedProduct(product || null);
     setContactMode(mode);
     setIsCartOpen(false);
@@ -173,7 +173,7 @@ function App() {
         <p className="product-description">{product.description}</p>
         <p className="product-specs">{product.specs}</p>
         {paymentMode === 'installment' && <p className="payment-note">Est. 72 months · 6.99% APR</p>}
-        <div className="product-actions"><button className="button button-small" onClick={() => addToCart(product)}>Add to shortlist</button><button className="icon-button" onClick={() => openContact(product)} aria-label={`Contact manager about ${product.name}`}>↗</button></div>
+        <div className="product-actions"><button className="button button-small" onClick={() => addToCart(product)}>Add to Checkout</button><button className="icon-button" onClick={() => openContact(product)} aria-label={`Contact manager about ${product.name}`}>↗</button></div>
       </div>
     </article>
   );
@@ -206,7 +206,7 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow">Tesla direct</p>
             <h1>Move<br /><em>beautifully.</em></h1>
-            <p className="hero-lede">Explore the current Tesla lineup. Choose your model, build your shortlist, and let a dedicated manager handle the details from payment to delivery.</p>
+            <p className="hero-lede">Explore the current Tesla lineup. Choose your model, build your checkout, and let a dedicated manager handle the details from payment to delivery.</p>
             <div className="hero-actions">
               <a className="button button-dark" href="#inventory">Shop vehicles <span>↓</span></a>
               <button className="text-button" onClick={() => openContact()}>Speak with a manager <span>↗</span></button>
@@ -270,7 +270,7 @@ function App() {
 
         <section className="feature-section" id="accessories">
           <div className="feature-image"><img src="/products/Home-charger.avif" alt="Tesla Wall Connector mounted at home" loading="lazy" /></div>
-          <div className="feature-copy"><p className="eyebrow">Complete the setup</p><h2>Charge at home.<br /><em>Wake up ready.</em></h2><p>Bring the Tesla experience home with the Wall Connector. Add accessories to your shortlist and your manager will help coordinate fit, installation, and delivery.</p><button className="button button-dark" onClick={() => addToCart(products.find((product) => product.id === 'wall-connector')!)}>Add Wall Connector <span>+</span></button></div>
+          <div className="feature-copy"><p className="eyebrow">Complete the setup</p><h2>Charge at home.<br /><em>Wake up ready.</em></h2><p>Bring the Tesla experience home with the Wall Connector. Add accessories to your checkout and your manager will help coordinate fit, installation, and delivery.</p><button className="button button-dark" onClick={() => addToCart(products.find((product) => product.id === 'wall-connector')!)}>Add Wall Connector <span>+</span></button></div>
         </section>
 
         <section className="full-payment-section">
@@ -282,17 +282,17 @@ function App() {
 
         <section className="process-section" id="process">
           <div className="section-heading"><div><p className="eyebrow">Simple by design</p><h2>Your next move.</h2></div><p className="section-note">Shopping is easy. The final details are personal.</p></div>
-          <div className="process-grid"><div><span>01</span><h3>Shortlist</h3><p>Add vehicles and accessories you want to discuss.</p></div><div><span>02</span><h3>Connect</h3><p>Share your contact details and a Tesla manager will reply.</p></div><div><span>03</span><h3>Drive home</h3><p>Confirm payment, delivery timing, and next steps together.</p></div></div>
+          <div className="process-grid"><div><span>01</span><h3>Checkout</h3><p>Add vehicles and accessories you want to discuss.</p></div><div><span>02</span><h3>Connect</h3><p>Share your contact details and a Tesla manager will reply.</p></div><div><span>03</span><h3>Drive home</h3><p>Confirm payment, delivery timing, and next steps together.</p></div></div>
         </section>
       </main>
 
       <footer className="site-footer"><div className="footer-logo" aria-label="Tesla"> <svg className="logo-svg" viewBox="0 0 342 35" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 .1a9.7 9.7 0 0 0 7 7h11l.5.1v27.6h6.8V7.3L26 7h11a9.8 9.8 0 0 0 7-7H0zm238.6 0h-6.8v34.8H263a9.7 9.7 0 0 0 6-6.8h-30.3V0zm-52.3 6.8c3.6-1 6.6-3.8 7.4-6.9l-38.1.1v20.6h31.1v7.2h-24.4a13.6 13.6 0 0 0-8.7 7h39.9v-21h-31.2v-7zm116.2 28h6.7v-14h24.6v14h6.7v-21h-38zM85.3 7h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 13.8h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 14.1h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7M308.5 7h26a9.6 9.6 0 0 0 7-7h-40a9.6 9.6 0 0 0 7 7"></path></svg></div><p>Electric vehicles and energy products, made for the road ahead.</p><div className="footer-actions"><a className="giveaway-link" href={giveawayUrl}>Enter the Tesla giveaway ↗</a><button className="text-button light" onClick={() => openContact()}>Contact a manager ↗</button></div><small>© 2026 Tesla direct sales portal · Prices shown in USD</small></footer>
 
-      {isCartOpen && <div className="overlay" onClick={() => setIsCartOpen(false)}><aside className="side-drawer" onClick={(event) => event.stopPropagation()}><div className="drawer-header"><div><p className="eyebrow">Your shortlist</p><h2>{cartCount} item{cartCount === 1 ? '' : 's'}</h2></div><button className="close-button" onClick={() => setIsCartOpen(false)} aria-label="Close shortlist">×</button></div>{cartItems.length === 0 ? <div className="drawer-empty"><p>Your shortlist is empty.</p><button className="button button-dark" onClick={() => setIsCartOpen(false)}>Browse the collection</button></div> : <><div className="drawer-items">{cartItems.map((product) => <div className="drawer-item" key={product.id}><img src={product.image} alt="" /><div><h3>{product.name}</h3><p>{formatPrice(product.price)}</p><div className="quantity"><button onClick={() => updateQuantity(product.id, -1)} aria-label="Decrease quantity">−</button><span>{cart[product.id]}</span><button onClick={() => updateQuantity(product.id, 1)} aria-label="Increase quantity">+</button></div></div></div>)}</div><div className="drawer-footer"><div><span>Estimated total</span><strong>{formatPrice(cartTotal)}</strong></div><p>Final pricing, payment, and delivery are confirmed directly with your manager.</p><button className="button button-dark full-width" onClick={() => openContact(undefined, 'shortlist')}>Contact manager about my shortlist ↗</button></div></>}</aside></div>}
+      {isCartOpen && <div className="overlay" onClick={() => setIsCartOpen(false)}><aside className="side-drawer" onClick={(event) => event.stopPropagation()}><div className="drawer-header"><div><p className="eyebrow">Your Checkout</p><h2>{cartCount} item{cartCount === 1 ? '' : 's'}</h2></div><button className="close-button" onClick={() => setIsCartOpen(false)} aria-label="Close checkout">×</button></div>{cartItems.length === 0 ? <div className="drawer-empty"><p>Your checkout is empty.</p><button className="button button-dark" onClick={() => setIsCartOpen(false)}>Browse the collection</button></div> : <><div className="drawer-items">{cartItems.map((product) => <div className="drawer-item" key={product.id}><img src={product.image} alt="" /><div><h3>{product.name}</h3><p>{formatPrice(product.price)}</p><div className="quantity"><button onClick={() => updateQuantity(product.id, -1)} aria-label="Decrease quantity">−</button><span>{cart[product.id]}</span><button onClick={() => updateQuantity(product.id, 1)} aria-label="Increase quantity">+</button></div></div></div>)}</div><div className="drawer-footer"><div><span>Estimated total</span><strong>{formatPrice(cartTotal)}</strong></div><p>Final pricing, payment, and delivery are confirmed directly with your manager.</p><button className="button button-dark full-width" onClick={() => openContact(undefined, 'checkout')}>Contact manager about checkout ↗</button></div></>}</aside></div>}
 
-      {selectedProduct && <div className="modal-backdrop" onClick={() => setSelectedProduct(null)}><div className="product-modal" onClick={(event) => event.stopPropagation()}><button className="close-button" onClick={() => setSelectedProduct(null)} aria-label="Close product details">×</button><img src={selectedProduct.image} alt={selectedProduct.name} /><div className="modal-copy"><p className="eyebrow">{selectedProduct.category} / {selectedProduct.type}</p><h2>{selectedProduct.name}</h2><p>{selectedProduct.description}</p><strong className="modal-price">{formatPrice(selectedProduct.price)}</strong><p className="product-specs">{selectedProduct.specs}</p><div className="modal-actions"><button className="button button-dark" onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}>Add to shortlist</button><button className="text-button" onClick={() => openContact(selectedProduct)}>Ask a manager ↗</button></div></div></div></div>}
+      {selectedProduct && <div className="modal-backdrop" onClick={() => setSelectedProduct(null)}><div className="product-modal" onClick={(event) => event.stopPropagation()}><button className="close-button" onClick={() => setSelectedProduct(null)} aria-label="Close product details">×</button><img src={selectedProduct.image} alt={selectedProduct.name} /><div className="modal-copy"><p className="eyebrow">{selectedProduct.category} / {selectedProduct.type}</p><h2>{selectedProduct.name}</h2><p>{selectedProduct.description}</p><strong className="modal-price">{formatPrice(selectedProduct.price)}</strong><p className="product-specs">{selectedProduct.specs}</p><div className="modal-actions"><button className="button button-dark" onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}>Add to Checkout</button><button className="text-button" onClick={() => openContact(selectedProduct)}>Ask a manager ↗</button></div></div></div></div>}
 
-      {isContactOpen && <div className="modal-backdrop" onClick={() => setIsContactOpen(false)}><div className="contact-modal" onClick={(event) => event.stopPropagation()}><button className="close-button" onClick={() => setIsContactOpen(false)} aria-label="Close contact options">×</button><p className="eyebrow">Personal support</p><h2>Let’s get you moving.</h2><p className="modal-intro">Choose the channel you prefer. A Tesla manager will help confirm availability, payment, and delivery details securely.</p><div className="contact-options"><a className="contact-channel" href={emailHref}><span className="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5.5h18v13H3zM4 6.5l8 6 8-6M4 17.5l5-5m11 5-5-5" /></svg></span><span><strong>Email a manager</strong><small>Send a private message</small></span><b aria-hidden="true">↗</b></a><a className="contact-channel whatsapp" href={whatsappHref} target="_blank" rel="noreferrer"><span className="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.2 13.1L3.5 20.5l4-1.2A8.5 8.5 0 1 0 12 3.5Z" /><path d="M8.7 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.5.6c.5 1 1.3 1.8 2.3 2.3l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.4.2-1 .3-1.5.1-2.8-.7-4.9-2.8-5.6-5.6-.2-.6-.1-1.1.2-1.4Z" /></svg></span><span><strong>Chat on WhatsApp</strong><small>Open a direct conversation</small></span><b aria-hidden="true">↗</b></a></div><p className="contact-context">{selectedProduct ? `Your message will mention the ${selectedProduct.name}.` : 'You can include a vehicle, accessory, or shortlist in your message.'}</p></div></div>}
+      {isContactOpen && <div className="modal-backdrop" onClick={() => setIsContactOpen(false)}><div className="contact-modal" onClick={(event) => event.stopPropagation()}><button className="close-button" onClick={() => setIsContactOpen(false)} aria-label="Close contact options">×</button><p className="eyebrow">Personal support</p><h2>Let’s get you moving.</h2><p className="modal-intro">Choose the channel you prefer. A Tesla manager will help confirm availability, payment, and delivery details securely.</p><div className="contact-options"><a className="contact-channel" href={emailHref}><span className="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5.5h18v13H3zM4 6.5l8 6 8-6M4 17.5l5-5m11 5-5-5" /></svg></span><span><strong>Email a manager</strong><small>Send a private message</small></span><b aria-hidden="true">↗</b></a><a className="contact-channel whatsapp" href={whatsappHref} target="_blank" rel="noreferrer"><span className="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.2 13.1L3.5 20.5l4-1.2A8.5 8.5 0 1 0 12 3.5Z" /><path d="M8.7 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.5.6c.5 1 1.3 1.8 2.3 2.3l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.4.2-1 .3-1.5.1-2.8-.7-4.9-2.8-5.6-5.6-.2-.6-.1-1.1.2-1.4Z" /></svg></span><span><strong>Chat on WhatsApp</strong><small>Open a direct conversation</small></span><b aria-hidden="true">↗</b></a></div><p className="contact-context">{selectedProduct ? `Your message will mention the ${selectedProduct.name}.` : 'You can include a vehicle, accessory, or checkout in your message.'}</p></div></div>}
     </div>
   );
 }
